@@ -12,19 +12,19 @@
 
     @method('PATCH')
 
-    <div>
+    <div class="form-group">
         <input type="text" name="title" placeholder="Title" autocomplete="off" value="{{ $post->name }}">
         @error ('title') <p style="color:red;">{{ $message }}</p> @enderror
     </div>  
 
-    <div>
+    <div class="form-group">
         <input type="text" name="body" placeholder="Body" autocomplete="off" value="{{ $post->body }}">
         @error ('body') <p style="color:red;">{{ $message }}</p> @enderror
     </div>  
 
     @csrf
     
-    <button>Save Edited Post</button> 
+    <button class="btn btn-danger mt-3 mb-3">Save Edited Post</button> 
 
 </form>
 
