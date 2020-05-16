@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use App\Mail\ContactMail;
+use Newsletter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
