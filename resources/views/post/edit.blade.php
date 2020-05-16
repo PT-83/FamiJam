@@ -2,7 +2,11 @@
 
 @section('content')
 
-<h1>Edit Post</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="pt-3 pl-3 pr-3 card">
+                <h1 class="text-secondary">Edit Post</h1>
 
 <form action="/posts/{{$post->id }}" method="POST">
 
@@ -22,6 +26,11 @@
     
     <button>Save Edited Post</button> 
 
-</form>  
+</form>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
