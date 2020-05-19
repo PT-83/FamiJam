@@ -3,10 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Mail\WelcomeMail;
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 

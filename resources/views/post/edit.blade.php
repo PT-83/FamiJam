@@ -8,7 +8,7 @@
             <div class="pt-3 pl-3 pr-3 card">
                 <h1 class="text-secondary">Edit Post</h1>
 
-<form action="/posts/{{$post->id }}" method="POST">
+<form action="/posts/{{$post->id }}" method="POST" enctype="multipart/form-data">
 
     @method('PATCH')
 

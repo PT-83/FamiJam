@@ -6,7 +6,7 @@
 
 
                 <div class="card-body">
-                    <form action="/posts/create" method="post">
+                    <form action="/posts/create" method="post" enctype="multipart/form-data">
 
                         @csrf
 
@@ -20,6 +20,14 @@
                             <label for="body">Body</label>
                             <textarea type="text" name="body" cols="30" rows="3" class="form-control" id="body" aria-describedby="bodyHelp" placeholder="Enter Post Body" autocomplete="off"></textarea>
                              <small id="bodyHelp" class="form-text text-muted">Enter as much detail you'd like!</small>
+                        </div>
+
+                        <div class="form-group d-flex flex-column">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" class="py-2">
+                        <div>{{ errors->first('image') }}</div>
+                                
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">Create Post</button>
