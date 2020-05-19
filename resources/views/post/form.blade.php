@@ -6,7 +6,7 @@
 
 
                 <div class="card-body">
-                    <form action="posts/create" method="POST" enctype="multipart/form-data">
+                    <form action="/post/create" method="POST" enctype="multipart/form-data">
 
 
                         @csrf
