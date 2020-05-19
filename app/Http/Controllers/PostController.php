@@ -46,7 +46,8 @@ class PostController extends Controller
     {
         $data = request()->validate([
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'image' => 'nullable'
         ]);
 
         $post = \App\Post::create($data);
@@ -73,6 +74,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+      
+
         return view('post.edit', compact('post'));
     }
 
@@ -86,6 +89,8 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $post->update($this->validatedData());
+
+        $this->storeImage($post);
 
         return \redirect('/posts');
     }
@@ -107,9 +112,21 @@ class PostController extends Controller
     {
         return request()->validate([
             'title' => 'required',
-            'body' => 'required'
-            //'photograph'=> nullable
-            //'gif'=> nullable
+            'body' => 'required',
+            'imager' => 'sometimes|file|image|max:5000',
         ]);
+    }
+        
+    protected function storeImage($post)
+    {
+
+        if (request()->has('image')){
+            $post->update([
+                'image' => request()->image->store('uploads', 'public'),
+            ]);
+
+            $image = Image::make(public_path('storage/' . $post->image))->fit(500, 500, null, 'top-left');
+            $image->save();
+        }
     }
 }
