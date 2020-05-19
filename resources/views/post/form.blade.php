@@ -6,7 +6,7 @@
 
 
                 <div class="card-body">
-                    <form action="/posts/create" method="post" enctype="multipart/form-data">
+                    <form action="/posts/create" method="POST" enctype="multipart/form-data">
 
                         @csrf
 
@@ -26,8 +26,6 @@
                             <label for="image">Image</label>
                             <input type="file" name="image" class="py-2">
                         <div>{{ errors->first('image') }}</div>
-                                
-                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">Create Post</button>
