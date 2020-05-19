@@ -8,6 +8,8 @@
                 <div class="card-body">
                     <form action="/posts/create" method="POST" enctype="multipart/form-data">
 
+                        @method('PATCH')
+
                         @csrf
 
                         <div class="form-group">
