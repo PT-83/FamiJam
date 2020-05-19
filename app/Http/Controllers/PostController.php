@@ -47,10 +47,11 @@ class PostController extends Controller
         $data = request()->validate([
             'title' => 'required',
             'body' => 'required',
-            'image' => 'nullable'
         ]);
 
         $post = \App\Post::create($data);
+
+        $this->storeImage($post);
 
         return redirect('/posts');
     }
