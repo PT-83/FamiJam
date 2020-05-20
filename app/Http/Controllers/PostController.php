@@ -51,7 +51,7 @@ class PostController extends Controller
 
         $post = \App\Post::create($data);
 
-        $this->storeImage($post);
+         $this->storeImage($post);
 
         return redirect('/posts');
     }
@@ -114,7 +114,7 @@ class PostController extends Controller
         return request()->validate([
             'title' => 'required',
             'body' => 'required',
-            'imager' => 'sometimes|file|image|max:5000',
+            'image' => 'sometimes|file|image|max:5000',
         ]);
     }
         
