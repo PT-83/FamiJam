@@ -75,8 +75,6 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-      
-
         return view('post.edit', compact('post'));
     }
 
@@ -93,7 +91,7 @@ class PostController extends Controller
 
         $this->storeImage($post);
 
-        return \redirect('/posts');
+        return redirect('/posts');
     }
 
     /**
@@ -109,7 +107,7 @@ class PostController extends Controller
         return redirect('/posts');
     }
 
-    protected function validatedData()
+    private function validatedData()
     {
         return request()->validate([
             'title' => 'required',
@@ -118,7 +116,7 @@ class PostController extends Controller
         ]);
     }
         
-    protected function storeImage($post)
+    private function storeImage($post)
     {
 
         if (request()->has('image')){
