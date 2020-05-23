@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
+ 
 
 class PostController extends Controller
 {
@@ -21,6 +27,7 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
+
         return view('post.index', compact('posts'));
     }
 
@@ -31,7 +38,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $post = new Post();
+        $post = new Post(); // What is this?
 
         return view('post.create', compact ('post'));
     }
@@ -42,17 +49,23 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        $data = request()->validate([
+        
+        $request->validate([
             'title' => 'required',
             'body' => 'required',
         ]);
 
-        $post = \App\Post::create($data);
+        $post = Post::create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
 
-         $this->storeImage($post);
-
+        $this->storeImage($post);
+    
         return redirect('/posts');
     }
 
@@ -87,7 +100,9 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post->update($this->validatedData());
+        $this->validatedRequest();
+
+        $post->update($request->except('image'));
 
         $this->storeImage($post);
 
@@ -107,7 +122,7 @@ class PostController extends Controller
         return redirect('/posts');
     }
 
-    private function validatedData()
+    private function validatedRequest()
     {
         return request()->validate([
             'title' => 'required',
@@ -118,14 +133,16 @@ class PostController extends Controller
         
     private function storeImage($post)
     {
-
-        if (request()->has('image')){
+   if (request()->has('image')) {
+            $filename = Str::random(14).'.'.request()->image->getClientOriginalExtension();
+        
+            $image = Image::make(request()->image)->fit(300, 300, null, 'top-left')->encode();
+        
+            Storage::disk('public')->put("uploads/{$filename}", (string) $image);
+        
             $post->update([
-                'image' => request()->image->store('uploads', 'public'),
+                'image' => "uploads/{$filename}"
             ]);
-
-            $image = Image::make(public_path('storage/' . $post->image))->fit(500, 500, null, 'top-left');
-            $image->save();
         }
     }
 }

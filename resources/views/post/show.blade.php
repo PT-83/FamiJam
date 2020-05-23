@@ -18,6 +18,14 @@
                     <strong class="text-secondary mt-2">Body</strong>
                         <p>{{ $post->body }}</p>
 
+                @if($post->image)
+                    <div class="row">
+                        <div class="col-12">
+                            <img src="{{ asset("storage/{$post->image}") }}">
+                        </div>
+                    </div>
+                @endif
+
                 <div>
                     <a href="/posts/{{ $post->id }}/edit">Edit</a>
 
@@ -32,4 +40,7 @@
         </div>
     </div>
 </div>
+
+    
+
 @endsection

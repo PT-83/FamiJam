@@ -8,9 +8,6 @@
                 <div class="card-body">
                     <form action="/posts/create" method="POST" enctype="multipart/form-data">
 
-
-                        @csrf
-
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Enter Title" autocomplete="off">
@@ -26,8 +23,11 @@
                         <div class="form-group d-flex flex-column">
                             <label for="image">Post Image</label>
                             <input type="file" name="image" class="py-2">
+                            
                         <div>{{ $errors->first('image') }}</div>
                         </div>
+
+                        @csrf
 
                         <button type="submit" class="btn btn-primary">Create Post</button>
 
