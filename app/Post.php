@@ -10,6 +10,3 @@ class Post extends Model
 protected $guarded = [];
 
 }
-
-
-
