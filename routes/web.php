@@ -31,5 +31,7 @@ Route::get('/posts/{post}/edit', 'PostController@edit');
 Route::patch('/posts/{post}', 'PostController@update');
 Route::delete('/posts/{post}', 'PostController@destroy');
 
+Route::post('/register', 'Auth\RegisterController@create')->name('register');
+
 Route::get('/contact', 'ContactController@create');
 Route::post('/contact', 'ContactController@store');
